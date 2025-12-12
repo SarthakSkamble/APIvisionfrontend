@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Indexpage } from "./pages";
 import { SignUp } from "./pages/signup";
