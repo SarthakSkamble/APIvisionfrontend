@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Indexpage } from "./pages";
 import { SignUp } from "./pages/signup";
 import { Login } from "./pages/login";
@@ -11,7 +11,7 @@ import { ApiTree } from "./pages/TreePage";
 function App() {
   return (
     <>
-    <BrowserRouter>
+    
     <Routes>
       <Route path="/" element={<Indexpage />} />
       <Route path="/signup" element={<SignUp />} />
@@ -25,7 +25,7 @@ function App() {
       
 
     </Routes>
-    </BrowserRouter>
+    
       
     </>
   );
