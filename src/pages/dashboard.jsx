@@ -11,7 +11,7 @@ export function Dashboard() {
     localStorage.removeItem("token");
     localStorage.removeItem("currentProjectId");
     localStorage.removeItem("currentFeatureId");
-    navigate("/login");
+    navigate("/");
   }
 
   return (
