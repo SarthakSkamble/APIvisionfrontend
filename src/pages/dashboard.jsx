@@ -6,6 +6,7 @@ export function Dashboard() {
   const [activeTab, setActiveTab] = useState("projects");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const firstletter = localStorage.getItem("firstletter");
 
   function handleLogout() {
     localStorage.removeItem("token");
@@ -52,7 +53,7 @@ export function Dashboard() {
           <div className="flex items-center gap-4">
             {/* User avatar */}
             <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-semibold">
-              {token ? token[0].toUpperCase() : "?"}
+              {firstletter ? firstletter[0].toUpperCase() : "?"}
             </div>
 
             {/* Logout */}
