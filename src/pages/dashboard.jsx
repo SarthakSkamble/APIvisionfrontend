@@ -26,7 +26,7 @@ export function Dashboard() {
         </h2>
 
         <nav className="space-y-4">
-          {["projects", "features", "apis", "tags"].map((tab) => (
+          {["projects"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
