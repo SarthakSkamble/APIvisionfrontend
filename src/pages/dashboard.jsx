@@ -1,9 +1,13 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+/* ================= DASHBOARD ================= */
 
 export function Dashboard() {
   const [activeTab, setActiveTab] = useState("projects");
+  const [showProfile, setShowProfile] = useState(false);
+  const [user, setUser] = useState(null);
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const firstletter = localStorage.getItem("firstletter");
@@ -13,8 +17,28 @@ export function Dashboard() {
     localStorage.removeItem("currentProjectId");
     localStorage.removeItem("currentFeatureId");
     localStorage.removeItem("firstletter");
-    
     navigate("/");
+  }
+
+  async function fetchUserInfo() {
+    try {
+      const res = await fetch(
+        "https://apivision.onrender.com/api/v1/user/me",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+      if (data.success) {
+        setUser(data.user);
+        setShowProfile((prev) => !prev);
+      }
+    } catch (err) {
+      console.error("Fetch user error:", err);
+    }
   }
 
   return (
@@ -50,33 +74,53 @@ export function Dashboard() {
             {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
           </h1>
 
-          <div className="flex items-center gap-4">
-            {/* User avatar */}
-            <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-semibold">
-              {firstletter ? firstletter[0].toUpperCase() : "?"}
-            </div>
-
-            {/* Logout */}
+          {/* Avatar + Profile */}
+          <div className="relative">
             <button
-              onClick={handleLogout}
-              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+              onClick={fetchUserInfo}
+              className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-semibold hover:bg-blue-600 transition"
             >
-              Logout
+              {firstletter ? firstletter[0].toUpperCase() : "?"}
             </button>
+
+            {showProfile && user && (
+              <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-lg p-4 z-50">
+                <p className="text-sm text-gray-500">Signed in as</p>
+                <p className="font-semibold text-gray-800 break-all">
+                  {user.email}
+                </p>
+
+                <div className="mt-3 text-sm text-gray-600 space-y-1">
+                  <p>
+                    <span className="font-medium">Role:</span> {user.role}
+                  </p>
+                  <p>
+                    <span className="font-medium">Joined:</span>{" "}
+                    {new Date(user.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+
+                <button
+                  onClick={handleLogout}
+                  className="mt-4 w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </header>
 
         {/* Content */}
         <div className="bg-white rounded-xl shadow p-6 min-h-[70vh]">
           {activeTab === "projects" && <ProjectsSection />}
-          
         </div>
       </main>
     </div>
   );
 }
 
-/* ---------------- PROJECTS ---------------- */
+/* ================= PROJECTS ================= */
 
 function ProjectsSection() {
   const navigate = useNavigate();
@@ -157,18 +201,4 @@ function ProjectCard({ id, name, description }) {
       </button>
     </div>
   );
-}
-
-/* ---------------- PLACEHOLDERS ---------------- */
-
-function FeaturesSection() {
-  return <div>No features yet</div>;
-}
-
-function ApisSection() {
-  return <div>No APIs yet</div>;
-}
-
-function TagsSection() {
-  return <div>No tags yet</div>;
 }
