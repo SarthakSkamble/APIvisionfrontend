@@ -23,7 +23,7 @@ export function Dashboard() {
   async function fetchUserInfo() {
     try {
       const res = await fetch(
-        "https://apivision.onrender.com/api/v1/user/me",
+        "https://apivision.onrender.com/api/v1/createproject/me",
         {
           headers: {
             Authorization: `Bearer ${token}`,
