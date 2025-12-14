@@ -69,9 +69,7 @@ export function Dashboard() {
         {/* Content */}
         <div className="bg-white rounded-xl shadow p-6 min-h-[70vh]">
           {activeTab === "projects" && <ProjectsSection />}
-          {activeTab === "features" && <FeaturesSection />}
-          {activeTab === "apis" && <ApisSection />}
-          {activeTab === "tags" && <TagsSection />}
+          
         </div>
       </main>
     </div>
