@@ -8,7 +8,7 @@ export function ApiTree() {
 
   const projectId = localStorage.getItem("currentProjectId");
 
-  // Fetch tree data
+  
   useEffect(() => {
     async function fetchTree() {
       const res = await fetch(
@@ -23,7 +23,7 @@ export function ApiTree() {
     fetchTree();
   }, [projectId]);
 
-  // Center tree horizontally
+  
   const containerRef = useCallback((container) => {
     if (container !== null) {
       const dimensions = container.getBoundingClientRect();
@@ -59,17 +59,15 @@ export function ApiTree() {
   );
 }
 
-/* -----------------------------------------------------------
-   🌟 CUSTOM NODE DESIGN (MODERN, CLEAN, SPACED)
------------------------------------------------------------ */
+
 const CustomNode = ({ nodeDatum }) => {
   const level = nodeDatum.__rd3t.depth;
 
   const colors = [
-    "#374151", // project (dark gray)
-    "#2563eb", // feature (blue)
-    "#16a34a", // parent API (green)
-    "#f59e0b", // child API (orange)
+    "#374151", 
+    "#2563eb", 
+    "#16a34a", 
+    "#f59e0b", 
   ];
 
   const circleColor = colors[level] || "#6b7280";
@@ -126,9 +124,7 @@ const CustomNode = ({ nodeDatum }) => {
   );
 };
 
-/* -----------------------------------------------------------
-   Convert backend → React-D3-Tree structure
------------------------------------------------------------ */
+
 function convertToTree(apiData) {
   return {
     name: apiData.projectName,
