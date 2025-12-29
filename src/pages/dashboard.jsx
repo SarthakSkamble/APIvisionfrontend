@@ -162,7 +162,7 @@ function ProjectsSection() {
       >
         + Create New Project
       </button>
-      <br>
+      
       <h2 className="text-xl font-bold mb-4">If projects not fout refresh the page</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
