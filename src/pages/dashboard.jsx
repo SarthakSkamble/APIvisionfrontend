@@ -155,13 +155,15 @@ function ProjectsSection() {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Your Projects</h2>
-      <h2>If projects not fout refresh the page</h2>
+      
       <button
         onClick={() => navigate("/createproject")}
         className="px-4 py-2 bg-blue-600 text-white rounded-lg mb-4"
       >
         + Create New Project
       </button>
+      <br>
+      <h2 className="text-xl font-bold mb-4">If projects not fout refresh the page</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {projects.length === 0 ? (
