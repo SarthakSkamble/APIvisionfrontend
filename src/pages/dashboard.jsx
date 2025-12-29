@@ -42,6 +42,7 @@ export function Dashboard() {
   }
 
   return (
+    
     <div className="min-h-screen flex bg-gray-100">
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-md p-6 hidden md:block">
@@ -154,7 +155,7 @@ function ProjectsSection() {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Your Projects</h2>
-
+      <h2>If projects not fout refresh the page</h2>
       <button
         onClick={() => navigate("/createproject")}
         className="px-4 py-2 bg-blue-600 text-white rounded-lg mb-4"
